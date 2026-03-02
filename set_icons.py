@@ -10,6 +10,7 @@ import requests
 NOTION_TOKEN = os.environ["NOTION_TOKEN"]
 BASE_URL = "https://api.notion.com/v1"
 ICON_BASE = "https://raw.githubusercontent.com/Jack02913/notion-assets/main"
+CACHE_BUST = "?v=2"
 
 HEADERS = {
     "Authorization": f"Bearer {NOTION_TOKEN}",
@@ -35,7 +36,7 @@ def set_icon(area_name, page_id, svg_file):
     payload = {
         "icon": {
             "type": "external",
-            "external": {"url": f"{ICON_BASE}/{svg_file}"},
+            "external": {"url": f"{ICON_BASE}/{svg_file}{CACHE_BUST}"},
         }
     }
     response = requests.patch(url, headers=HEADERS, json=payload)
